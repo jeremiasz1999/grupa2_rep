@@ -11,8 +11,8 @@ year = int(input("Enter your birth year: "))
 month = int(input("Enter your birth month: "))
 day = int(input("Enter your birth day: "))
 
-bithdate = date(year, month, day)
-your_age = date.today().day
+birthdate = date(year, month, day)
+your_age = date.today() - birthdate #timedelta object
 
 ulam_days = (date.today() - ulams_birthdate)
-print(f'Ulam was {ulam_days - your_age.day} days old when you were born')
+print(f'Ulam was {ulam_days.days - your_age.days} days old when you were born')
