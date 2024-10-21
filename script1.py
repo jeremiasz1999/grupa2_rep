@@ -1,9 +1,10 @@
-from datetime import date, timedelta
+from datetime import date,
 
 
 print('Hello word')
 
 ulams_birthdate = date(1909, 4, 14)
+ulam_days = (date.today() - ulams_birthdate).days
 
 print("Number of days since Ulam's birthady: " , (date.today() - ulams_birthdate).days)
 
@@ -12,7 +13,7 @@ month = int(input("Enter your birth month: "))
 day = int(input("Enter your birth day: "))
 
 birthdate = date(year, month, day)
-your_age = date.today() - birthdate #timedelta object
+your_age = date.today() - birthdate
 
-ulam_days = (date.today() - ulams_birthdate)
-print(f'Ulam was {ulam_days.days - your_age.days} days old when you were born')
+
+print(f'Ulam was {ulam_days - your_age.days} days old when you were born')
