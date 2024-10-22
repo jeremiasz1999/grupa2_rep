@@ -1,0 +1,3 @@
+[submodule "grupa2_sub"]
+	path = grupa2_sub
+	url = https://github.com/jeremiasz1999/grupa2_sub.git
