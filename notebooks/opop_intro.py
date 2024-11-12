@@ -37,33 +37,45 @@ class Population:
         self._specimens = value
         self.n = len(value)
 
-    def natural_selection(self):
+    def natural_selection(self):   
         # Próbujemy zabić wszystkie stwory (dla każdego odpalamy .kill)
         #for specimen in self.speciemens:
             #specimen.kill()
-
+        newborns = {specimen.reproduce() for specimen in self.specimens} - {None}
         {specimen.kill() for specimen in self.specimens}
+       
         
         # Zapisujemy gdzieś poprzedni stan populacji (n)
         
         self.history.append(self.n)
         
         # Usuwamy z populacji zabite stwory
+        
         self.specimens = {specimen for specimen in self.specimens
-                          if specimen.alive}
+                          if specimen.alive} | newborns
+
+    def plot_history(self):
+        plt.plot(self.history)
+         
         
 
 class Creature:
     alive = True  # Atrybut
-    p_death = 0.2 
+    p_death = 0.2
     p_reproduce = 0.2
+
+    def __init__(self, p_death=0.2, p_reproduce=0.2):
+        self.p_death = p_death
+        self.p_reproduce = p_reproduce
+        self.alive = True
     
     def kill(self):  # Metoda
         if random.random() <= self.p_death:
             self.alive = False
     def reproduce(self):  
         if random.random() <= self.p_reproduce and self.alive: 
-            return Creature()
+            return Creature(p_death = self.p_death, 
+                            p_reproduce = self.p_reproduce )
             
 
 
@@ -127,6 +139,6 @@ while population.n:
 population.n
 
 # %%
-population.history
+population.plot_history()
 
 # %%
