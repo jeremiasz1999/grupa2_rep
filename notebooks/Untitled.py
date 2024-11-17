@@ -13,7 +13,28 @@
 #     name: python3
 # ---
 
-# %%
-#ssdhs#
+# %% [markdown]
+# # Typowanie zmiennnych w Pythonie
+
+# %% [markdown]
+# ## Typy zmiennych
+
+# %% [markdown]
+# ## Typowanie statyczne
+
+# %% [markdown]
+# ## Typowanie dynamiczne i duck typing
+
+# %% [markdown]
+# ## Dodawanie typów zmiennych do funkcji
+
+# %% [markdown]
+# ## Wady i zalety typowania zmiennych
+
+# %% [markdown]
+# ## Type Annotations or Type comments
+
+# %% [markdown]
+# # Deck of Cards
 
 # %%
