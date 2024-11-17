@@ -28,6 +28,27 @@
 # %% [markdown]
 # ## Dodawanie typów zmiennych do funkcji
 
+# %%
+# Dodwanie type hints do funkcji:
+
+# %%
+def headline(text: str, align: bool = True) -> str: #text str informuje mypy że zmienna text powinna być typu str, a align typu bool
+    if align:
+        return f"{text.title()}\n{'-' * len(text)}"
+    else:
+        return f" {text.title()} ".center(50, "o")
+
+
+# %%
+
+# %%
+print(headline("python type checking"))
+print(headline("use mypy","center"))
+
+# %%
+print(headline("python type checking"))
+print(headline("use mypy", False))
+
 # %% [markdown]
 # ## Wady i zalety typowania zmiennych
 
