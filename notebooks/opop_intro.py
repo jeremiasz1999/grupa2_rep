@@ -43,7 +43,6 @@ class Population:
             #specimen.kill()
         newborns = {specimen.reproduce() for specimen in self.specimens} - {None}
         {specimen.kill() for specimen in self.specimens}
-       
         
         # Zapisujemy gdzieś poprzedni stan populacji (n)
         
@@ -56,10 +55,33 @@ class Population:
 
     def plot_history(self):
         plt.plot(self.history)
-         
+
+    def plot_histogram(self, parameter): # parameter = 'p+death', na przykład
+        # self.specimens to jest zbiór stworów a każdy stwór ma swoje p_death
+        # z każdego stwora biorę jego "śmietelność" -> zbiór śmiertelności 
+        # i ten zbiór śmiertelności wizualizuje na histogramie
         
+        plt.hist([getattr(specimen, parameter) for specimen in self.specimens])
+
+class Probability:
+
+    def __get__(self, obj, objtype=None): # będizemy odczytywać wartość zapisaną gdzie indziej
+        # Wartość będize zapisana w _p_death
+        return obj._p_death
+
+    def __set__(self, obj, value): # tutaj chcemy pinować właściwych wartości ( 0 =<value =< 1)
+        if value < 0:
+            obj._p_death = 0
+        elif value > 1:
+            obj._p_death = 1
+        else:
+            obj._p_death = value
 
 class Creature:
+
+    sigma = 0.02
+    p_death = Probability()
+    
     alive = True  # Atrybut
     p_death = 0.2
     p_reproduce = 0.2
@@ -74,9 +96,8 @@ class Creature:
             self.alive = False
     def reproduce(self):  
         if random.random() <= self.p_reproduce and self.alive: 
-            return Creature(p_death = self.p_death, 
-                            p_reproduce = self.p_reproduce )
-            
+            return Creature(p_death = self.p_death + random.gauss(mu=0, sigma=Creature.sigma),
+                            p_reproduce = self.p_reproduce + random.gauss(mu=0, sigma=Creature.sigma))
 
 
 # %%
@@ -126,13 +147,10 @@ meduza.reproduce()
 meduza.reproduce() 
 
 # %%
-_42
-
-# %%
 population = Population()
 
 # %%
-while population.n:
+for _ in range(40):
     population.natural_selection()
 
 # %%
@@ -140,5 +158,11 @@ population.n
 
 # %%
 population.plot_history()
+
+# %%
+population.plot_histogram('p_death')
+
+# %%
+population.plot_histogram('p_reproduce')
 
 # %%
