@@ -14,7 +14,7 @@
 # ---
 
 # %% [markdown]
-# # Typowanie zmiennych w Pythonie
+# # **Typowanie zmiennych w Pythonie**
 
 # %% [markdown]
 # ## Typy zmiennych
@@ -246,7 +246,7 @@ type(pi)
 # powinniśmy skorzystać z komentarzy.
 
 # %% [markdown]
-# # Deck of cards
+# # **Deck of cards**
 
 # %% [markdown]
 # Python zawiera również bardziej skomplikowane typy danych niż str, bool oraz float. Poniżej przedstawimy program który sumuluje grę
@@ -289,7 +289,7 @@ if __name__ == "__main__":
 # Funkcja create_deck tworzy nam "nie przetasowaną" talię kart. Deal_hands dzieli karty na czterech graczy. Funkcja play na ten moment jedynie tasuje talię oraz definuje graczy jako P1,P2,P3,P4 i przydziela im karty. Zmienna hands łączy nazwy graczy z odpowaidającymi im listami kart, na zasadzie klucz-wartość: zip(["P1", "P2", "P3", "P4"], (hand1, hand2, hand3, hand4)). Ostatnia pętla for odpowiada za wyświetlenie kart jako ciągu znaków.
 
 # %% [markdown]
-# Teraz postaramy się opisać zmienne w naszym kodzie w następujący sposób:
+# ## Teraz postaramy się opisać zmienne w naszym kodzie
 
 # %%
 from typing import Dict, List, Tuple
@@ -315,6 +315,9 @@ def create_deck(shuffle: bool = False) -> List[Tuple[str, str]]:
 
 
 # %% [markdown]
+# ## Mapowanie i sekwencje
+
+# %% [markdown]
 # W pythonie możemy zdefiniować **sekwencje liczb**, np listy lub krotki, które zawierają liczby zmiennoprzecinkowe. Pojawia się tu duck typing ponieważ nie ważne czy jako arugment funkcji podam listę czy krotkę, w wyniku otrzymamy to samo.
 
 # %%
@@ -325,6 +328,9 @@ from typing import List, Sequence
 def square(elems: Sequence[float]) -> List[float]:
     return [x**2 for x in elems]
 
+
+# %% [markdown]
+# ## Aliasy
 
 # %% [markdown]
 # Do opisu deal_hands będziemy wykorzystywali **Aliasy**, dzięki temu nasze adnotacje są bardziej czytelne.
@@ -345,5 +351,62 @@ Deck
 
 # %% [markdown]
 # W każdej chwili możemy sprawdzić co się kryje pod konkretnym aliasem
+
+# %% [markdown]
+# ## Funkcje bez zwracanej wartości
+
+# %% [markdown]
+# Jeśli w fukcji nie zadamy wartości zwracanej, to zwraca nam wartość: none.
+
+# %%
+"""Funckja wyświetla nazwę gracza"""
+
+def play(player_name):
+     print(f"{player_name} plays")
+
+
+# %%
+value = play("gracz")
+type(value)
+
+
+# %% [markdown]
+# Jeśli dopiszemy adnotacje do funkcji to mypy stwierdzi, że nie zwraca wartości ponieważ none nie jesteśmy w stanie wykorzystać w żaden sposób.
+
+# %%
+def play(player_name: str) -> None:
+    print(f"{player_name} plays")
+
+# value = play("gracz")
+
+
+# %%
+# !mypy play.py
+
+# %% [markdown]
+# Gdybyśmy nie dodali adnotacji samej wartości zwracanej mypy uzna że wszystko jest okej.
+
+# %%
+def play2(player_name: str):
+    print(f"{player_name} plays")
+
+# value = play2("gracz")
+
+
+# %%
+# !mypy play2.py
+
+# %%
+from typing import NoReturn
+
+def black_hole(text: str) -> NoReturn:
+    raise Exception("There is no going back ...")
+
+
+# %%
+black_hole("return")
+
+# %% [markdown]
+# Jeśli chcemy żeby funkcja zupełnie niczego nie zwracała to możemy zamiportować typowanie NoRetrun. Wywołując funkcje zawsze dostaniem zastrzeżenie
 
 # %%
