@@ -29,11 +29,22 @@ piwa = {
 }
 
 lista_piw = list(piwa.keys())
-moc = 6
+lista_piww = []
 wybrane = []
 i=None
 j= None
 
-for i in lista_piw:
-    if moc > piwa[i]:
-        print(f'{i}')
+# for i in lista_piw:
+#     for j in piwa[i].items():
+#         lista_piww.append(j)
+#
+
+nazwa = None
+moc = None
+cena = None
+for nazwa, parametry in piwa.items():
+    for i in parametry:
+        lista_piww.append(i)
+for j in lista_piww[0::2]:
+        if j >= 6:
+            print(f'{nazwa}')
