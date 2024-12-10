@@ -29,7 +29,7 @@ if __name__ == '__main__':
     unittest.main(verbosity=2)
 
 
-# Oprccz unittest.skip mamy jeszcze:
+# Oprocz unittest.skip mamy jeszcze:
 # - unittest,skipIf(condition, reason)
 #   np. condition = sys.version_info < (3,3)
 #
