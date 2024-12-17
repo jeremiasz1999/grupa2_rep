@@ -5,19 +5,38 @@ from age1 import categorize_by_age
 class TestCategorizeByAge(unittest.TestCase):
 
     def test_child(self):
-        ages = [0, 1, 5, 10]
+
+        ages = range(11)
 
         for age in ages:
-            self.assertEqual(categorize_by_age(age), 'Child')
+            with self.subTest(number=age):
+                self.assertEqual(categorize_by_age(age), 'Child')
 
     def test_teenager(self):
-        self.assertEqual(categorize_by_age(15),'Teenager')
+
+        ages = range(11, 20)
+
+        for age in ages:
+            with self.subTest(number=age):
+                self.assertEqual(categorize_by_age(age), 'Teenager')
+
+
 
     def test_adult(self):
-        self.assertEqual(categorize_by_age(30), 'Adult')
+
+        ages = range(20, 66)
+
+        for age in ages:
+            with self.subTest(number=age):
+                self.assertEqual(categorize_by_age(age), 'Adult')
 
     def test_senior(self):
-        self.assertEqual(categorize_by_age(70), 'Senior')
+
+        ages = range(66, 151)
+
+        for age in ages:
+            with self.subTest(number=age):
+                self.assertEqual(categorize_by_age(age), 'Senior')
 
     def test_negative_age(self):
         self.assertEqual(categorize_by_age(-5), 'Invalid age: -5.')
