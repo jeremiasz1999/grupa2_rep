@@ -44,3 +44,30 @@ stages:
       hash: md5
       md5: e26b033723855ecd9a65a3711ba5de8a
       size: 263150
+  evaluate:
+    cmd: python src/fit_models.py
+    deps:
+    - path: data/iris.csv
+      hash: md5
+      md5: 500a0acbd112b7c512929eac892f9864
+      size: 4009
+    - path: src/config.py
+      hash: md5
+      md5: c945e346dfa95602d25f0e415bee3e7c
+      size: 178
+    - path: src/fit_models.py
+      hash: md5
+      md5: af837bb65e770c6a1b495f55b48b8407
+      size: 1729
+    - path: src/utils.py
+      hash: md5
+      md5: 0e3cb3ae41782831a1f8ef33aaec7fb5
+      size: 394
+    params:
+      params.yaml:
+        evaluate.model: rf
+    outs:
+    - path: eval/metrics.json
+      hash: md5
+      md5: cafa865c511b12960042476cc58a460a
+      size: 36
